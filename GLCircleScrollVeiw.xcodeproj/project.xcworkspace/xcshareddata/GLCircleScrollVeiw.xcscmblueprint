@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BF094ACA03C0B344315F732B853F303A18538F63",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BF094ACA03C0B344315F732B853F303A18538F63" : 0,
+    "A7EC1B87CDCCB24D3032A8D0F81774DCC393C24B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DC5C84EB-3DF5-4A4A-92A0-993E318077BE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BF094ACA03C0B344315F732B853F303A18538F63" : "GLCircleScrollView",
+    "A7EC1B87CDCCB24D3032A8D0F81774DCC393C24B" : "..\/..\/..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "GLCircleScrollVeiw",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "GLCircleScrollVeiw.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/gerrit.nh.fangdd.cn:29418\/fangdd\/ershoufang\/SecondHouseBrokerIOS",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A7EC1B87CDCCB24D3032A8D0F81774DCC393C24B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:god-long\/GLCircleScrollView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BF094ACA03C0B344315F732B853F303A18538F63"
+    }
+  ]
+}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-let TimeInterval = 2.5 // 全局的时间间隔
+let TimeInterval = 3.5 // 全局的时间间隔
 
 class CirCleView: UIView, UIScrollViewDelegate {
     var contentScrollView: UIScrollView!
@@ -24,7 +24,7 @@ class CirCleView: UIView, UIScrollViewDelegate {
         }
     }
     
-    private var totalPageNumber : Int?
+    private var totalPageNumber : Int!
     private var currentImageView: UIImageView!
     private var lastImageView: UIImageView!
     private var nextImageView: UIImageView!
@@ -86,9 +86,9 @@ class CirCleView: UIView, UIScrollViewDelegate {
     
     // MARK:- 设置图片
     private func setScrollViewOfImage() {
+        self.delegate?.refreshImageViewAtIndex(self.lastImageView, index: self.getLastImageIndex(indexOfCurrentImage: self.indexOfCurrentImage))
         self.delegate?.refreshImageViewAtIndex(self.currentImageView, index: self.indexOfCurrentImage)
         self.delegate?.refreshImageViewAtIndex(self.nextImageView, index: self.getNextImageIndex(indexOfCurrentImage: self.indexOfCurrentImage))
-        self.delegate?.refreshImageViewAtIndex(self.lastImageView, index: self.getLastImageIndex(indexOfCurrentImage: self.indexOfCurrentImage))
     }
     
     // 得到上一张图片的下标
@@ -154,12 +154,11 @@ class CirCleView: UIView, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(scrollView:UIScrollView){
-        
         let offset = scrollView.contentOffset.x
         if offset == 0 {
             self.indexOfCurrentImage=self.getLastImageIndex(indexOfCurrentImage:self.indexOfCurrentImage)
-        }else if offset==self.frame.size.width*2{
-            self.indexOfCurrentImage=self.getNextImageIndex(indexOfCurrentImage:self.indexOfCurrentImage)
+        }else if offset == self.frame.size.width * 2 {
+            self.indexOfCurrentImage = self.getNextImageIndex(indexOfCurrentImage:self.indexOfCurrentImage)
         }
         //重新布局图片
         self.setScrollViewOfImage()
@@ -167,8 +166,8 @@ class CirCleView: UIView, UIScrollViewDelegate {
         scrollView.setContentOffset(CGPointMake(self.frame.size.width, 0), animated:false)
         
         //重置计时器
-        if timer==nil{
-            self.timer=NSTimer.scheduledTimerWithTimeInterval(TimeInterval, target:self, selector:"timerAction", userInfo:nil, repeats:true)
+        if timer == nil {
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(TimeInterval, target:self, selector:"timerAction", userInfo:nil, repeats:true)
         }
     }
     

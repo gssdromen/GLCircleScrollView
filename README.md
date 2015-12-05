@@ -9,6 +9,8 @@
    > 图片点击代理
    
    > 可设置图片Url的数组（如果要赋url数组的话，最好自己改成sd加载图片的方式）
+   
+   > 图片数量和图片加载都由代理完成，增加reloadData函数
 
 
     ![](https://github.com/god-long/GLCircleScrollView/raw/master/Circle.gif) 

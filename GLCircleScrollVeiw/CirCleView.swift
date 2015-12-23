@@ -41,11 +41,69 @@ class CirCleView: UIView, UIScrollViewDelegate {
         self.setUpCircleView()
     }
     
+    init() {
+        super.init(frame: CGRectZero)
+        // 默认显示第一张图片
+        self.indexOfCurrentImage = 0
+        self.setUpCircleViewAutoLayout()
+    }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK:- Privite Methods
+    private func setUpCircleViewAutoLayout() {
+        self.contentScrollView = UIScrollView()
+        self.contentScrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.contentScrollView)
+        self.currentImageView = UIImageView()
+        self.lastImageView = UIImageView()
+        self.nextImageView = UIImageView()
+        self.lastImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.currentImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.nextImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentScrollView.addSubview(self.lastImageView)
+        self.contentScrollView.addSubview(self.currentImageView)
+        self.contentScrollView.addSubview(self.nextImageView)
+        
+        contentScrollView.delegate = self
+        contentScrollView.bounces = false
+        contentScrollView.pagingEnabled = true
+        contentScrollView.backgroundColor = UIColor.greenColor()
+        contentScrollView.showsHorizontalScrollIndicator = false
+        
+        // 添加点击事件
+        let imageTap = UITapGestureRecognizer(target: self, action: Selector("imageTapAction:"))
+        currentImageView.addGestureRecognizer(imageTap)
+        
+        currentImageView.userInteractionEnabled = true
+        currentImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        currentImageView.clipsToBounds = true
+        contentScrollView.addSubview(currentImageView)
+        
+        lastImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        lastImageView.clipsToBounds = true
+        contentScrollView.addSubview(lastImageView)
+        
+        nextImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        nextImageView.clipsToBounds = true
+        contentScrollView.addSubview(nextImageView)
+        
+        // 设置计时器
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(TimeInterval, target: self, selector: "timerAction", userInfo: nil, repeats: true)
+        
+        self.contentScrollView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[last(width)][current(width)][next(width)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["width": UIScreen.mainScreen().bounds.size.width], views: ["last": self.lastImageView, "current": self.currentImageView, "next": self.nextImageView]))
+        self.contentScrollView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[last(150)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["last": self.lastImageView, "current": self.currentImageView, "next": self.nextImageView]))
+        self.contentScrollView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[current(150)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["last": self.lastImageView, "current": self.currentImageView, "next": self.nextImageView]))
+        self.contentScrollView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[next(150)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["last": self.lastImageView, "current": self.currentImageView, "next": self.nextImageView]))
+        self.backgroundColor = UIColor.blueColor()
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["scrollView": self.contentScrollView]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["scrollView": self.contentScrollView]))
+        
+    }
+    
     private func setUpCircleView() {
         self.contentScrollView = UIScrollView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
         contentScrollView.contentSize = CGSizeMake(self.frame.size.width * 3, 0)
